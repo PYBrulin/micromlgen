@@ -1,5 +1,7 @@
 import json
+
 import numpy as np
+
 from micromlgen.utils import jinja
 
 
@@ -63,7 +65,4 @@ def port_wifi_indoor_positioning(samples):
     y = get_y(samples, classmap)
     # classmap is flipped wrt the format `port` expects: flip it
     classmap = {v: k for k, v in classmap.items()}
-    return X, y, classmap, jinja('wifiindoorpositioning/wifiindoorpositioning.jinja', {
-        'X': X,
-        'networkmap': networkmap
-    })
+    return X, y, classmap, jinja('wifiindoorpositioning/wifiindoorpositioning.jinja', {'X': X, 'networkmap': networkmap})

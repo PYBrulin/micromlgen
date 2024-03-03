@@ -1,9 +1,7 @@
 ARDUINO = 'arduino'
 ATTINY = 'attiny'
-ALL = [
-    ARDUINO,
-    ATTINY
-]
+PURE_C = 'pure_c'
+ALL = [ARDUINO, ATTINY, PURE_C]
 
 ALLOWED_CLASSIFIERS = [
     'SVC',
@@ -19,5 +17,5 @@ ALLOWED_CLASSIFIERS = [
     'PCA',
     'PrincipalFFT',
     'LinearRegression',
-    'XGBClassifier'
+    'XGBClassifier',
 ]

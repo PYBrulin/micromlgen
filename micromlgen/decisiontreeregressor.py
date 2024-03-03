@@ -1,4 +1,4 @@
-from micromlgen.utils import jinja, check_type
+from micromlgen.utils import check_type, jinja
 
 
 def is_decisiontree_regressor(clf):
@@ -16,14 +16,17 @@ def port_decisiontree_regressor(clf, **kwargs):
     :param clf:
     :return: str ported classifier
     """
-    return jinja('decisiontree/decisiontree_regressor.jinja', {
-        'dtype': 'float',
-        'left': clf.tree_.children_left,
-        'right': clf.tree_.children_right,
-        'features': clf.tree_.feature,
-        'thresholds': clf.tree_.threshold,
-        'values': clf.tree_.value,
-        'i': 0
-    }, {
-        'classname': 'DecisionTreeRegressor'
-    }, **kwargs)
+    return jinja(
+        'decisiontree/decisiontree_regressor.jinja',
+        {
+            'dtype': 'float',
+            'left': clf.tree_.children_left,
+            'right': clf.tree_.children_right,
+            'features': clf.tree_.feature,
+            'thresholds': clf.tree_.threshold,
+            'values': clf.tree_.value,
+            'i': 0,
+        },
+        {'classname': 'DecisionTreeRegressor'},
+        **kwargs
+    )

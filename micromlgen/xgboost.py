@@ -1,6 +1,7 @@
-from micromlgen.utils import jinja, check_type
-from tempfile import NamedTemporaryFile
 import json
+from tempfile import NamedTemporaryFile
+
+from micromlgen.utils import check_type, jinja
 
 
 def format_tree(tree):
@@ -13,12 +14,7 @@ def format_tree(tree):
     split_conditions = tree['split_conditions']
     left_children = tree['left_children']
     right_children = tree['right_children']
-    return {
-        'left': left_children,
-        'right': right_children,
-        'features': split_indices,
-        'thresholds': split_conditions
-    }
+    return {'left': left_children, 'right': right_children, 'features': split_indices, 'thresholds': split_conditions}
 
 
 def is_xgboost(clf):
@@ -48,9 +44,12 @@ def port_xgboost(clf, tmp_file=None, **kwargs):
 
     trees = [format_tree(tree) for tree in decoded['learner']['gradient_booster']['model']['trees']]
 
-    return jinja('xgboost/xgboost.jinja', {
-        'n_classes': int(decoded['learner']['learner_model_param']['num_class']),
-        'trees': trees,
-    }, {
-        'classname': 'XGBClassifier'
-    }, **kwargs)
+    return jinja(
+        'xgboost/xgboost.jinja',
+        {
+            'n_classes': int(decoded['learner']['learner_model_param']['num_class']),
+            'trees': trees,
+        },
+        {'classname': 'XGBClassifier'},
+        **kwargs
+    )

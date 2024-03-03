@@ -1,4 +1,4 @@
-from micromlgen.utils import jinja, check_type
+from micromlgen.utils import check_type, jinja
 
 
 def is_linear_regression(clf):
@@ -8,11 +8,9 @@ def is_linear_regression(clf):
 
 def port_linear_regression(clf, classname=None, **kwargs):
     """Port Linear Regression"""
-    return jinja('linearregression/linearregression.jinja', {
-        'coefs': clf.coef_,
-        'intercept': clf.intercept_,
-        'dimension': len(clf.coef_),
-        'dtype': 'float'
-    }, {
-        'classname': 'LinearRegression'
-    }, **kwargs)
+    return jinja(
+        'linearregression/linearregression.jinja',
+        {'coefs': clf.coef_, 'intercept': clf.intercept_, 'dimension': len(clf.coef_), 'dtype': 'float'},
+        {'classname': 'LinearRegression'},
+        **kwargs
+    )

@@ -1,4 +1,4 @@
-from micromlgen.utils import jinja, check_type
+from micromlgen.utils import check_type, jinja
 
 
 def is_sefr(clf):
@@ -8,10 +8,13 @@ def is_sefr(clf):
 
 def port_sefr(clf, classname=None, **kwargs):
     """Port SEFR classifier"""
-    return jinja('sefr/sefr.jinja', {
-        'weights': clf.weights,
-        'bias': clf.bias,
-        'dimension': len(clf.weights),
-    }, {
-        'classname': 'SEFR'
-    }, **kwargs)
+    return jinja(
+        'sefr/sefr.jinja',
+        {
+            'weights': clf.weights,
+            'bias': clf.bias,
+            'dimension': len(clf.weights),
+        },
+        {'classname': 'SEFR'},
+        **kwargs
+    )

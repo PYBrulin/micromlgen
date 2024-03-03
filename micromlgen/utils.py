@@ -1,9 +1,10 @@
 import os
 import re
-from math import sin, cos
 from collections.abc import Iterable
 from inspect import getmro
-from jinja2 import FileSystemLoader, Environment
+from math import cos, sin
+
+from jinja2 import Environment, FileSystemLoader
 
 
 def check_type(instance, *classes):
@@ -59,24 +60,19 @@ def jinja(template_file, data, defaults=None, **kwargs):
         defaults = {}
     defaults.setdefault('platform', 'arduino')
     defaults.setdefault('classmap', None)
-    defaults.update({
-        'f': {
-            'enumerate': enumerate,
-            'round': lambda x: round(x, precision),
-            'zip': zip,
-            'signed': lambda x: '' if x == 0 else '+' + str(x) if x >= 0 else x,
-            'to_array': lambda x, as_int=False: ', '.join([precision_fmt % xx if not as_int else str(xx) for xx in x])
-        },
-        'math': {
-            'cos': cos,
-            'sin': sin
+    defaults.update(
+        {
+            'f': {
+                'enumerate': enumerate,
+                'round': lambda x: round(x, precision),
+                'zip': zip,
+                'signed': lambda x: '' if x == 0 else '+' + str(x) if x >= 0 else x,
+                'to_array': lambda x, as_int=False: ', '.join([precision_fmt % xx if not as_int else str(xx) for xx in x]),
+            },
+            'math': {'cos': cos, 'sin': sin},
         }
-    })
-    data = {
-        **defaults,
-        **kwargs,
-        **data
-    }
+    )
+    data = {**defaults, **kwargs, **data}
     code = template.render(data)
     return prettify(code)
 

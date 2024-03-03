@@ -1,3 +1,10 @@
+> [!WARNING]
+> This fork does not follow the structure or versioning of the original project. Changes have been made to the code to fix certain problems and add new features, but it is not guaranteed to be stable or to work as intended from the original project, nor will the original documentation apply to this fork.
+>
+> The main features added are the generation of pure c-code for models instead of the Cpp-Arduino templates/namespaces; in addition to corrections to the original code.
+>
+> Please note that as this fork may have diverged from the original project for my own use, I won't be making a pull request to the original project.
+
 # Introducing MicroML
 
 MicroML is an attempt to bring Machine Learning algorithms to microcontrollers.
@@ -6,20 +13,20 @@ to an introduction to the topic.
 
 ## Install
 
-`pip install micromlgen`
+`pip install git+https://github.com/PYBrulin/micromlgen.git`
 
 ## Supported classifiers
 
 `micromlgen` can port to plain C many types of classifiers:
 
- - DecisionTree
- - RandomForest
- - XGBoost
- - GaussianNB
- - Support Vector Machines (SVC and OneClassSVM)
- - Relevant Vector Machines (from `skbayes.rvm_ard_models` package)
- - SEFR
- - PCA
+- DecisionTree
+- RandomForest
+- XGBoost
+- GaussianNB
+- Support Vector Machines (SVC and OneClassSVM)
+- Relevant Vector Machines (from `skbayes.rvm_ard_models` package)
+- SEFR
+- PCA
 
 ```python
 from micromlgen import port
@@ -67,7 +74,7 @@ from micromlgen import port
 if __name__ == '__main__':
     X = load_iris().data
     pca = PCA(n_components=2, whiten=False).fit(X)
-    
+
     print(port(pca))
 ```
 
@@ -106,7 +113,7 @@ if __name__ == '__main__':
     X, y = load_boston(return_X_y=True)
     regr = DecisionTreeRegressor(max_depth=10, min_samples_leaf=5).fit(X, y)
     regr = RandomForestRegressor(n_estimators=10, max_depth=10, min_samples_leaf=5).fit(X, y)
-    
+
     with open('RandomForestRegressor.h', 'w') as file:
         file.write(port(regr))
 ```

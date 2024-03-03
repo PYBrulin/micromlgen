@@ -1,4 +1,4 @@
-from micromlgen.utils import jinja, check_type
+from micromlgen.utils import check_type, jinja
 
 
 def is_gaussiannb(clf):
@@ -8,12 +8,15 @@ def is_gaussiannb(clf):
 
 def port_gaussiannb(clf, **kwargs):
     """Port sklearn's GaussianNB"""
-    return jinja('gaussiannb/gaussiannb.jinja', {
-        'sigma': clf.sigma_,
-        'theta': clf.theta_,
-        'prior': clf.class_prior_,
-        'classes': clf.classes_,
-        'n_classes': len(clf.classes_)
-    }, {
-        'classname': 'GaussianNB'
-    }, **kwargs)
+    return jinja(
+        'gaussiannb/gaussiannb.jinja',
+        {
+            'sigma': clf.sigma_,
+            'theta': clf.theta_,
+            'prior': clf.class_prior_,
+            'classes': clf.classes_,
+            'n_classes': len(clf.classes_),
+        },
+        {'classname': 'GaussianNB'},
+        **kwargs
+    )

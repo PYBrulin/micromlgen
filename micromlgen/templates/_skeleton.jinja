@@ -1,27 +1,33 @@
 #pragma once
+{% if platform != "pure_c"%}
 #include <cstdarg>
-
 namespace Eloquent {
     namespace ML {
         namespace Port {
             class {{ classname }} {
                 public:
+{% endif %}
 
-                    /**
-                     * Predict class for features vector
-                     */
-                    {{ dtype|default("int", true) }} predict(float *x) {
-                        {% block predict %}{% endblock %}
-                    }
+/**
+ * Predict class for features vector
+ */
+{{ dtype|default("int", true) }} predict(float *x) {
+    {% block predict %}{% endblock %}
+}
 
-                    {% include 'classmap.jinja' %}
+{% include 'classmap.jinja' %}
 
-                    {% block public %}{% endblock %}
+{% block public %}{% endblock %}
 
+{% if platform != "pure_c"%}
                 protected:
+{% endif %}
 
-                    {% block protected %}{% endblock %}
+{% block protected %}{% endblock %}
+
+{% if platform != "pure_c"%}
             };
         }
     }
 }
+{% endif %}

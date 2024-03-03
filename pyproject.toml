@@ -1,0 +1,52 @@
+[project]
+name = "micromlgen"
+authors = [
+    {name = "Simone Salerno", email = "eloquentarduino@gmail.com"},
+]
+description = "Multirotor propulsion chain simulation tool"
+readme = "README.md"
+requires-python = ">=3.7"
+keywords = [
+    'ML',
+    'microcontrollers',
+    'sklearn',
+    'machine learning'
+]
+license = {text = "MIT"}
+classifiers = [
+    'Development Status :: 5 - Production/Stable',
+    'Intended Audience :: Developers',
+    'Topic :: Software Development :: Code Generators',
+    'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python :: 3',
+]
+dynamic = ["version"]
+dependencies = [
+    "jinja2",
+]
+
+[build-system]
+requires = ["setuptools>=64", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+version_file = "micromlgen/_version.py"
+
+[tool.setuptools]
+packages = ["micromlgen"]
+
+[tool.setuptools.package-data]
+micromlgen = ["templates/*"]
+
+[tool.isort]
+known_first_party = "micromlgen"
+atomic = true
+line_length = 127
+multi_line_output = 3
+use_parentheses = true
+include_trailing_comma = true
+force_grid_wrap = 0
+
+[tool.black]
+skip-string-normalization = true
+line-length = 127

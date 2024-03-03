@@ -1,4 +1,4 @@
-from micromlgen.utils import jinja, check_type
+from micromlgen.utils import check_type, jinja
 
 
 def is_logisticregression(clf):
@@ -8,11 +8,9 @@ def is_logisticregression(clf):
 
 def port_logisticregression(clf, **kwargs):
     """Port sklearn's LogisticRegressionClassifier"""
-    return jinja('logisticregression/logisticregression.jinja', {
-        'weights': clf.coef_,
-        'intercept': clf.intercept_,
-        'classes': clf.classes_,
-        'n_classes': len(clf.classes_)
-    }, {
-        'classname': 'LogisticRegression'
-    }, **kwargs)
+    return jinja(
+        'logisticregression/logisticregression.jinja',
+        {'weights': clf.coef_, 'intercept': clf.intercept_, 'classes': clf.classes_, 'n_classes': len(clf.classes_)},
+        {'classname': 'LogisticRegression'},
+        **kwargs
+    )

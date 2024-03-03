@@ -1,4 +1,4 @@
-from micromlgen.utils import jinja, check_type
+from micromlgen.utils import check_type, jinja
 
 
 def is_pca(clf):
@@ -8,11 +8,11 @@ def is_pca(clf):
 
 def port_pca(clf, **kwargs):
     """Port a PCA"""
-    return jinja('pca/pca.jinja', {
-        'arrays': {
-            'components': clf.components_,
-            'mean': clf.mean_
+    return jinja(
+        'pca/pca.jinja',
+        {
+            'arrays': {'components': clf.components_, 'mean': clf.mean_},
         },
-    }, {
-        'classname': 'PCA'
-    }, **kwargs)
+        {'classname': 'PCA'},
+        **kwargs
+    )
