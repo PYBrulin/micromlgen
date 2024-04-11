@@ -1,6 +1,7 @@
 from micromlgen import platforms
 from micromlgen.decisiontreeclassifier import is_decisiontree, port_decisiontree
 from micromlgen.decisiontreeregressor import is_decisiontree_regressor, port_decisiontree_regressor
+from micromlgen.extratreesclassifier import is_extratrees, port_extratrees
 from micromlgen.gaussiannb import is_gaussiannb, port_gaussiannb
 from micromlgen.linear_regression import is_linear_regression, port_linear_regression
 from micromlgen.logisticregression import is_logisticregression, port_logisticregression
@@ -26,6 +27,8 @@ def port(clf, classname=None, classmap=None, platform=platforms.ARDUINO, precisi
         return port_sefr(**locals())
     elif is_decisiontree(clf):
         return port_decisiontree(**locals())
+    elif is_extratrees(clf):
+        return port_extratrees(**locals())
     elif is_randomforest(clf):
         return port_randomforest(**locals())
     elif is_logisticregression(clf):

@@ -10,6 +10,7 @@ ALLOWED_CLASSIFIERS = [
     'SEFR',
     'DecisionTreeClassifier',
     'DecisionTreeRegressor',
+    'ExtraTreesClassifier',
     'RandomForestClassifier',
     'RandomForestRegressor',
     'GaussianNB',
